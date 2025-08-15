@@ -1,10 +1,8 @@
 <template>
-  <div v-if="mostrar" class="modal">
-    <div class="modal-content">
-      <slot>
-        <h3>Advertencia</h3>
-        <p>Ha ocurrido un error.</p>
-      </slot>
+  <div class="modal-backdrop" v-if="mostrar">
+    <div class="modal">
+      <h3>{{ titulo }}</h3>
+      <p>{{ mensaje }}</p>
       <button @click="$emit('cerrar')">Cerrar</button>
     </div>
   </div>
@@ -12,38 +10,31 @@
 
 <script>
 export default {
-  name: 'ModalAdvertencia',
+  name: "ModalAdvertencia",
   props: {
-    mostrar: {
-      type: Boolean,
-      required: true
-    }
+    mostrar: { type: Boolean, required: true },
+    titulo: { type: String, default: "Aviso" },
+    mensaje: { type: String, default: "Esta funcionalidad aún no está disponible." }
   }
-}
+};
 </script>
 
 <style scoped>
-.modal {
+.modal-backdrop {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex; justify-content: center; align-items: center;
 }
-.modal-content {
+.modal {
   background: white;
-  padding: 20px;
+  padding: 1.5rem;
   border-radius: 8px;
+  text-align: center;
+  max-width: 350px;
+}
+button {
+  margin-top: 1rem;
 }
 </style>
-
-<ModalAdvertencia   :mostrar="mostrarError"   @cerrar="mostrarError = false">
-  <template #default>
-    <h3>Error de Inicio de Sesión</h3>
-    <p>Por favor, complete ambos campos antes de continuar.</p>
-  </template>
-</ModalAdvertencia>
