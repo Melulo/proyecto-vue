@@ -1,5 +1,5 @@
 <template>
-  <div v-if="mostrar" class="modal">
+  <div v-if="mostrar" class="modal-backdrop" @click.self="$emit('cerrar')">
     <div class="modal-content">
       <slot>
         <h3>Advertencia</h3>
@@ -23,12 +23,9 @@ export default {
 </script>
 
 <style scoped>
-.modal {
+.modal-backdrop {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   background: rgba(0,0,0,0.5);
   display: flex;
   align-items: center;
@@ -38,12 +35,6 @@ export default {
   background: white;
   padding: 20px;
   border-radius: 8px;
+  min-width: 300px;
 }
 </style>
-
-<ModalAdvertencia   :mostrar="mostrarError"   @cerrar="mostrarError = false">
-  <template #default>
-    <h3>Error de Inicio de Sesión</h3>
-    <p>Por favor, complete ambos campos antes de continuar.</p>
-  </template>
-</ModalAdvertencia>
