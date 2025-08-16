@@ -47,7 +47,7 @@ export default {
   align-items: center;
 }
 .modal-content {
-  background: white;
+  background: rgb(0, 0, 0);
   padding: 20px;
   border-radius: 8px;
   min-width: 300px;
