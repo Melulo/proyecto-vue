@@ -1,29 +1,21 @@
 <template>
-  <Modal @close="$emit('close')">
-    <h3>Nuevo Mensaje</h3>
-    <div>
-      <label>Destinatario:</label>
-      <input v-model="form.destinatario" />
+  <div class="modal-backdrop">
+    <div class="modal-content">
+      <h3>Nuevo Mensaje</h3>
+      <input v-model="form.destinatario" placeholder="Destinatario" />
+      <input v-model="form.titulo" placeholder="Título" />
+      <textarea v-model="form.contenido" placeholder="Contenido"></textarea>
+
+      <button @click="enviar">Enviar</button>
+      <button @click="$emit('close')">Cancelar</button>
     </div>
-    <div>
-      <label>Título:</label>
-      <input v-model="form.titulo" />
-    </div>
-    <div>
-      <label>Contenido:</label>
-      <textarea v-model="form.contenido"></textarea>
-    </div>
-    <button @click="enviar">Enviar</button>
-    <button @click="$emit('close')">Cancelar</button>
-  </Modal>
+  </div>
 </template>
 
 <script>
-import Modal from './ModalAdvertencia.vue';
 import { store } from '../store';
 
 export default {
-  components: { Modal },
   data() {
     return {
       form: { destinatario: '', titulo: '', contenido: '' }
@@ -42,5 +34,22 @@ export default {
       this.$emit('close');
     }
   }
-};
+}
 </script>
+
+<style scoped>
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  min-width: 300px;
+}
+</style>
